@@ -13,10 +13,13 @@ public class AuthShopService implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("Attribute-->  "+request.getAttribute("p1")+"******* "+request.getHeader("userId"));
-		HttpSession session = request.getSession(false);
-		if(session !=null && session.getAttribute("authUser")!=null) {
-			System.out.println("Authenticated request in Shop service ");
+		System.out.println("Attribute-->  "+request.getAttribute("p1")+"******* "+request.getHeader("auth"));
+		String token = request.getHeader("auth");
+		
+		//HttpSession session = request.getSession(false);
+		if(token !=null) {
+			//TODO validate the Token
+			System.out.println("Authenticated request in Shop service");
 			return true;
 		} else {
 			System.out.println("Not Authenticted in shop service");
